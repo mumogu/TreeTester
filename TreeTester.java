@@ -69,27 +69,25 @@ public class TreeTester {
 
 		int[] testVector = generateTestVector(size);
 
-		try {
-		    FileWriter writer = new FileWriter(filename);
-		    writer.append("Size;Mutable;Immutable\n");
+		
+	    FileWriter writer = new FileWriter(filename);
+	    writer.append("Size;Mutable;Immutable\n");
 
-		    for(int i=1; i<=size; i+=step) {
-		    	System.out.print(i + "\t");
-		    	
-		    	long m = testMutable(testVector, i);
-		    	System.out.print(m + "\t");
+	    for(int i=1; i<=size; i+=step) {
+	    	System.out.print(i + "\t");
+	    	
+	    	long m = testMutable(testVector, i);
+	    	System.out.print(m + "\t");
 
-		    	long im = testImmutable(testVector, i);
-		    	System.out.println(im);
+	    	long im = testImmutable(testVector, i);
+	    	System.out.println(im);
 
-		    	writer.append(i + ";" + m + ";" + im + "\n");
-		    	writer.flush();
-		    }		    
+	    	writer.append(i + ";" + m + ";" + im + "\n");
+	    	writer.flush();
+	    }		    
 
-		    writer.flush();
-		    writer.close();
-		} catch (Exception ex) {
-			System.out.println("Exception");
-		}		
+	    writer.flush();
+	    writer.close();
+		
 	}
 }
