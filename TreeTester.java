@@ -74,10 +74,10 @@ public class TreeTester {
 		    writer.append("Size;Mutable;Immutable\n");
 
 		    for(int i=1; i<=size; i+=step) {
-		    	System.out.println(i + "\t");
+		    	System.out.print(i + "\t");
 		    	
 		    	long m = testMutable(testVector, i);
-		    	System.out.println(m + "\t");
+		    	System.out.print(m + "\t");
 
 		    	long im = testImmutable(testVector, i);
 		    	System.out.println(im);
