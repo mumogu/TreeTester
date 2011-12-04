@@ -29,11 +29,9 @@ public class TreeTester {
 		long start = System.currentTimeMillis();
 		Tree mt = new Tree(23);
 
-		// Add all integers to the tree
 		for(int i=0; i<length; i++)
 			mt.sortedInsert(testVector[i]);
 
-		// Remove them all
 		for(int i=0; i<length; i++) 
 			mt.sortedDelete(mt, testVector[i]);
 
@@ -56,7 +54,7 @@ public class TreeTester {
 		return System.currentTimeMillis() - start;			
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception{
 		
 		if(args.length != 3) {
 			System.out.println("Usage: TreeTester filename size step\nThe results are written to filename in csv format. Separator is ;");
@@ -70,24 +68,24 @@ public class TreeTester {
 		int[] testVector = generateTestVector(size);
 
 		
-	    FileWriter writer = new FileWriter(filename);
-	    writer.append("Size;Mutable;Immutable\n");
+		FileWriter writer = new FileWriter(filename);
+		writer.append("Size;Mutable;Immutable\n");
 
-	    for(int i=1; i<=size; i+=step) {
-	    	System.out.print(i + "\t");
-	    	
-	    	long m = testMutable(testVector, i);
-	    	System.out.print(m + "\t");
+		for(int i=step; i<=size; i+=step) {
+			System.out.print("#: " + i + "\t");
+			
+			long m = testMutable(testVector, i);
+			System.out.print("mutable: " + m + "ms" + "\t");
 
-	    	long im = testImmutable(testVector, i);
-	    	System.out.println(im);
+			long im = testImmutable(testVector, i);
+			System.out.println("immutable: " + im + "ms");
 
-	    	writer.append(i + ";" + m + ";" + im + "\n");
-	    	writer.flush();
-	    }		    
+			writer.append(i + ";" + m + ";" + im + "\n");
+			writer.flush();
+		}
 
-	    writer.flush();
-	    writer.close();
+		writer.flush();
+		writer.close();
 		
 	}
 }
