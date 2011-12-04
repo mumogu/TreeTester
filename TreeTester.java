@@ -43,11 +43,9 @@ public class TreeTester {
 		
 		ImmutableTree imt = new ImmutableTree(23, null, null);
 
-		// Add all integers to the tree
 		for(int i=0; i<length; i++)
 			imt = imt.sortedInsert(testVector[i]);
 
-		// Remove them all
 		for(int i=0; i<length; i++)
 			imt = imt.sortedDelete(testVector[i]);		
 		
