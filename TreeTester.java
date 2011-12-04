@@ -27,7 +27,7 @@ public class TreeTester {
 
 	private static long testMutable(int[] testVector, int length) {
 		long start = System.currentTimeMillis();
-		Tree mt = new Tree(23);
+		MutableTree mt = new DavidMutableTree(23);
 
 		for(int i=0; i<length; i++)
 			mt.sortedInsert(testVector[i]);
@@ -41,7 +41,7 @@ public class TreeTester {
 	private static long testImmutable(int[] testVector, int length) {
 		long start = System.currentTimeMillis();
 		
-		ImmutableTree imt = new ImmutableTree(23, null, null);
+		ImmutableTree imt = new DavidImmutableTree(23, null, null);
 
 		for(int i=0; i<length; i++)
 			imt = imt.sortedInsert(testVector[i]);
