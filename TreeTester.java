@@ -7,8 +7,8 @@ import java.io.IOException;
 public class TreeTester {
 	private static int[] generateTestVector(int size) {
 		System.out.println("Generating testvector with " + size + " elements...");
-
 		long start = System.currentTimeMillis();
+		
 		Random generator = new Random(42);
 		Set<Integer> set = new HashSet<Integer>();
 		int[] testVector = new int[size];
@@ -64,7 +64,6 @@ public class TreeTester {
 		int step = Integer.parseInt(args[2]);
 
 		int[] testVector = generateTestVector(size);
-
 		
 		FileWriter writer = new FileWriter(filename);
 		writer.append("Size;Mutable;Immutable\n");
