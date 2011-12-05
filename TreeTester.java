@@ -2,7 +2,6 @@ import java.util.Random;
 import java.util.Set;
 import java.util.HashSet;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.lang.reflect.Constructor;
 
 public class TreeTester {
