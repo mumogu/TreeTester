@@ -3,7 +3,7 @@ public class DavidMutableTree extends MutableTree {
 	private MutableTree left;
 	private MutableTree right;
 
-	public DavidMutableTree(int value) {
+	public DavidMutableTree(Integer value) {
 		this.value = value;
 		this.left = null;
 		this.right = null;
@@ -77,7 +77,6 @@ public class DavidMutableTree extends MutableTree {
 			}
 		}
 	}
-
 	
 	public MutableTree sortedDelete(MutableTree root, int deleteVal) {
 		if (root == null) return null;
@@ -124,5 +123,4 @@ public class DavidMutableTree extends MutableTree {
 		//no return here, to ensure no altered tree is returned
 		//return root; //root, den "neuen baum", zurueckgeben.
 	}
-
 }

@@ -1,4 +1,5 @@
 public abstract class MutableTree extends Tree {
+
 	public abstract MutableTree getLeft();
 
 	public abstract void setLeft(MutableTree left);

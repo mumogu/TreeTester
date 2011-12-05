@@ -2,7 +2,7 @@ public class MartinImmutableTree extends ImmutableTree {
 	private final int value;
 	private final ImmutableTree left, right;
 
-	public MartinImmutableTree(int value, ImmutableTree left, ImmutableTree right) {
+	public MartinImmutableTree(Integer value, ImmutableTree left, ImmutableTree right) {
 		this.value = value;
 		this.left = left;
 		this.right = right;

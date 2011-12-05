@@ -2,7 +2,7 @@ public class MartinMutableTree extends MutableTree {
 	private int value;
 	private MutableTree left, right;
 
-	public MartinMutableTree(int value) {
+	public MartinMutableTree(Integer value) {
 		this.value = value;
 		left = right = null;
 	}
@@ -12,7 +12,7 @@ public class MartinMutableTree extends MutableTree {
 	}
 
 	public void setValue(int value) {
-		this.value = value; 
+		this.value = value;
 	}
 
 	public MutableTree getLeft() {
@@ -28,7 +28,7 @@ public class MartinMutableTree extends MutableTree {
 	}
 
 	public void setRight(MutableTree right) {
-		this.right = right; 
+		this.right = right;
 	}
 
 	public String toString() {
@@ -37,7 +37,6 @@ public class MartinMutableTree extends MutableTree {
 
 	public MutableTree copy() {
 		MutableTree copy = new MartinMutableTree(value);
-		
 		if (left != null) {
 			copy.setLeft(left.copy());
 		}
@@ -71,14 +70,13 @@ public class MartinMutableTree extends MutableTree {
 		// Ansonsten ist der Wert gleich; keine Aktion durchführen
 	}
 
-/* 
- *
- * BEWARE: UGLY CODE AHEAD 
- *
- * Ich glaub den Code da unten kann man noch was hübscher machen, oder?
- * Innere Schleifen sind leider nicht erlaubt =(
- *
- */
+	/*
+	 * 
+	 * BEWARE: UGLY CODE AHEAD
+	 * 
+	 * Ich glaub den Code da unten kann man noch was hübscher machen, oder?
+	 * Innere Schleifen sind leider nicht erlaubt =(
+	 */
 
 	public MutableTree sortedDelete(MutableTree tree, int value) {
 		MutableTree result;
@@ -93,16 +91,21 @@ public class MartinMutableTree extends MutableTree {
 				// Wenn rechter zweig nicht leer, kleinstes Element von dort
 				// nehmen und hochkopieren, um sortierung beizubehalten
 				if (result.getRight() != null) {
-					MutableTree rightMin = (MutableTree) result.getRight().getMin(); // WTF braucht man diesen cast?!?!
+					MutableTree rightMin = (MutableTree) result.getRight().getMin(); // WTF
+																						// braucht
+																						// man
+																						// diesen
+																						// cast?!?!
 					result.setValue(rightMin.getValue());
 					result.setRight(sortedDelete(result.getRight(), rightMin.getValue()));
 				} else {
 					// Anderenfalls einfach linken Zweig hochkopieren (ist
-					// sicher vorhanden wegen left == right == null prüfung am Anfang)
+					// sicher vorhanden wegen left == right == null prüfung am
+					// Anfang)
 					result = result.getLeft();
 				}
 			}
-		} else {	
+		} else {
 			// Wurzel kopieren und kinder je nach value direkt kopieren oder
 			// Löschoperation auf ihnen durchführen
 			result = new MartinMutableTree(tree.getValue());
@@ -117,5 +120,9 @@ public class MartinMutableTree extends MutableTree {
 		}
 
 		return result;
+	}
+
+	public MutableTree newInstance(int value) {
+		return new MartinMutableTree(value);
 	}
 }
