@@ -9,13 +9,6 @@ public class DavidMutableTree extends MutableTree {
 		this.right = null;
 	}
 
-	public MutableTree newInstance(int value) {
-		MutableTree tr = new DavidMutableTree(value);
-		tr.setLeft(null);
-		tr.setRight(null);
-		return tr;
-	}
-
 	public int getValue() {
 		return this.value;
 	}
@@ -56,11 +49,11 @@ public class DavidMutableTree extends MutableTree {
 
 	public MutableTree copy() {
 		DavidMutableTree cp = new DavidMutableTree(this.value); // wurzel kopieren
-		cp.left = (MutableTree) (this.left != null ? this.left.copy() : null); // kinder
+		cp.left = (this.left != null ? this.left.copy() : null); // kinder
 																// kopieren,
 																// wenn nicht
 																// null
-		cp.right = (MutableTree) (this.right != null ? this.right.copy() : null);
+		cp.right = (this.right != null ? this.right.copy() : null);
 		return cp;
 	}
 

@@ -10,15 +10,10 @@ public abstract class MutableTree extends Tree {
 	public abstract void setValue(int value);
 
 	/**
-	 * Abweichend von der urspruenglichen Aufgabenstellung eine Factory-Methode.
-	 */
-	public abstract MutableTree newInstance(int value);
-
-	/**
 	 * Liefert eine Kopie des Baums. Modifikationen an der Kopie verursachen
 	 * keine Modifikation am urspruenglichen Baum.
 	 */
-	public abstract Tree copy();
+	public abstract MutableTree copy();
 
 	/**
 	 * Fuegt den uebergebenen Wert in den Baum ein, so dass dieser in seiner

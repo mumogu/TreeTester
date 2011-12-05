@@ -2,11 +2,6 @@ public abstract class ImmutableTree extends Tree {
 	public abstract ImmutableTree getLeft();
 
 	public abstract ImmutableTree getRight();
-	
-	/**
-	 * Abweichend von der urspruenglichen Aufgabenstellung eine Factory-Methode.
-	 */
-	public abstract ImmutableTree newInstance(int value);
 
 	/**
 	 * Fuegt den uebergebenen Wert in den Baum ein, so dass dieser in seiner
