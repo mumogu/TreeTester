@@ -3,7 +3,7 @@ public class DavidImmutableTree extends ImmutableTree {
 	private final ImmutableTree left;
 	private final ImmutableTree right;
 
-	public DavidImmutableTree(int value, ImmutableTree left, ImmutableTree right) {
+	public DavidImmutableTree(Integer value, ImmutableTree left, ImmutableTree right) {
 		this.value = value;
 		this.left = left;
 		this.right = right;

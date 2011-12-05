@@ -2,8 +2,12 @@ import java.util.Random;
 import java.util.Set;
 import java.util.HashSet;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Constructor;
 
 public class TreeTester {
+	private static final String[] players = { "David", "Martin" };
+
 	private static int[] generateTestVector(int size) {
 		System.out.println("Generating testvector with " + size + " elements...");
 		long start = System.currentTimeMillis();
@@ -49,11 +53,55 @@ public class TreeTester {
 		return System.currentTimeMillis() - start;
 	}
 
-	public static void main(String[] args) throws Exception {
+	private static void runTests(String filename, int size, int step) throws Exception {
+		int[] testVector = generateTestVector(size);
 
+		FileWriter writer = new FileWriter(filename);
+		writer.append("Size;");
+		for (String player : players) {
+			writer.append(player + "Mutable" + ";" + player + "Immutable;");
+		}
+		writer.append("\n");
+
+		for (int i = step; i <= size; i += step) {
+			System.out.print("#: " + i + "\t");
+			writer.append(i + ";");
+
+			for (String player : players) {
+				System.out.print(" | " + player + " ");
+
+				// Mutable
+				Class mTreeClass = Class.forName(player + "MutableTree");
+				Constructor mCtor = mTreeClass.getDeclaredConstructor(Integer.class);
+				MutableTree mTreeObj = (MutableTree) mCtor.newInstance(new Integer(42));
+
+				long mTreeTime = testMutable(mTreeObj, testVector, i);
+				System.out.print("m:" + mTreeTime + "ms ");
+
+				// Immutable
+				Class imTreeClass = Class.forName(player + "ImmutableTree");
+				Constructor imCtor = imTreeClass.getDeclaredConstructor(Integer.class, ImmutableTree.class, ImmutableTree.class);
+				ImmutableTree imTreeObj = (ImmutableTree) imCtor.newInstance(new Integer(42), null, null);
+
+				long imTreeTime = testImmutable(imTreeObj, testVector, i);
+				System.out.print("im:" + imTreeTime + "ms");
+
+				writer.append(mTreeTime + ";" + imTreeTime + ";");
+			}
+
+			System.out.println("");
+
+			writer.append("\n");
+			writer.flush();
+		}
+
+		writer.flush();
+		writer.close();
+	}
+
+	public static void main(String[] args) throws Exception {
 		if (args.length != 3) {
-			System.out.println("Usage: TreeTester filename size step"
-					+ "\nTests different implementations of a binary search tree."
+			System.out.println("Usage: TreeTester filename size step" + "\nTests different implementations of a binary search tree."
 					+ "\nThe results are written to <filename> in csv format. Separator is a semicolon (;)");
 			return;
 		}
@@ -62,38 +110,6 @@ public class TreeTester {
 		int size = Integer.parseInt(args[1]);
 		int step = Integer.parseInt(args[2]);
 
-		int[] testVector = generateTestVector(size);
-
-		FileWriter writer = new FileWriter(filename);
-		writer.append("Size;DavidMutable;DavidImmutable;MartinMutable;MartinImmutable\n");
-
-		for (int i = step; i <= size; i += step) {
-			System.out.print("#: " + i + "\t");
-
-			// David
-			MutableTree dmt = new DavidMutableTree(23);
-			long dm = testMutable(dmt, testVector, i);
-			System.out.print("DavidMutable: " + dm + "ms" + "\t");
-
-			ImmutableTree dimt = new DavidImmutableTree(23, null, null);
-			long dim = testImmutable(dimt, testVector, i);
-			System.out.print("DavidImmutable: " + dim + "ms" + "\t");
-
-			// Martin
-			MutableTree mmt = new MartinMutableTree(23);
-			long mm = testMutable(mmt, testVector, i);
-			System.out.print("MartinMutable: " + mm + "ms" + "\t");
-
-			ImmutableTree mimt = new MartinImmutableTree(23, null, null);
-			long mim = testImmutable(mimt, testVector, i);
-			System.out.println("MartinImmutable: " + mim + "ms");
-			
-			writer.append(i + ";" + dm + ";" + dim + ";" + mm + ";" + mim + "\n");
-			writer.flush();
-		}
-
-		writer.flush();
-		writer.close();
-
+		runTests(filename, size, step);
 	}
 }

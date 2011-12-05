@@ -3,7 +3,7 @@ public class DavidMutableTree extends MutableTree {
 	private MutableTree left;
 	private MutableTree right;
 
-	public DavidMutableTree(int value) {
+	public DavidMutableTree(Integer value) {
 		this.value = value;
 		this.left = null;
 		this.right = null;
@@ -124,5 +124,8 @@ public class DavidMutableTree extends MutableTree {
 
 		return root; // root, den "neuen baum", zurueckgeben.
 	}
-
+	
+	public MutableTree newInstance(int value) {
+		return new DavidMutableTree(value);
+	}
 }
