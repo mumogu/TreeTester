@@ -92,7 +92,7 @@ public class DavidMutableTree extends MutableTree {
 				MutableTree rightMin = (MutableTree)root.getRight().getMin();
 				
 				//root.value = rightMin.value; //kleinstes Element in die Wurzel kopieren
-				//root.right = sortedDelete(root.right, rightMin.value); //und aus rechtem teilbaum löschen
+				//root.right = sortedDelete(root.right, rightMin.value); //und aus rechtem teilbaum loeschen
 				
 				MutableTree newRoot = new DavidMutableTree(rightMin.getValue());
 				newRoot.setLeft(root.getLeft());

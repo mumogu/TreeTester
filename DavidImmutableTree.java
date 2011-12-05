@@ -73,7 +73,7 @@ public class DavidImmutableTree extends ImmutableTree {
 			} else { // this hat kinder
 				if (this.right != null) { // rechter teilbaum vorhanden.
 					// kleinstes element von rechts in die wurzel kopieren und
-					// aus rechtem teilbaum lšschen
+					// aus rechtem teilbaum loeschen
 					return new DavidImmutableTree(this.right.getMin().getValue(), this.left,
 							this.right.sortedDelete(this.right.getMin().getValue()));
 				} else { // kein rechter teilbaum
